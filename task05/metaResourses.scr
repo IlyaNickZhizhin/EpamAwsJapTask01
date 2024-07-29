@@ -1,0 +1,11 @@
+#!/bin/bash
+
+syndicate generate meta dynamodb --resource_name Events --hash_key_name Id \
+ --hash_key_type S --read_capacity 1 --write_capacity 1
+
+syndicate generate meta api_gateway --resource_name task5_api --deploy_stage api --minimum_compression_size 0
+
+syndicate generate meta api_gateway_resource --api_name task5_api --path events
+
+syndicate generate meta api_gateway_resource_method --api_name task5_api --path events \
+    --method POST --integration_type lambda --lambda_name "api_handler"
