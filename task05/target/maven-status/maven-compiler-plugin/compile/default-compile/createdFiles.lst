@@ -1,3 +1,5 @@
-com\task05\ApiHandler$Event.class
+com\task05\model\DynamoModel.class
+com\task05\dto\ResponseEvent.class
 com\task05\ApiHandler.class
-com\task05\ApiHandler$RequestEvent.class
+com\task05\dto\Event.class
+com\task05\dto\RequestEvent.class

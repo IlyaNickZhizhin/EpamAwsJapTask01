@@ -1,0 +1,53 @@
+package com.task05.model;
+
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+
+import java.util.Map;
+
+@DynamoDBTable(tableName = "cmtr-e28aa15d-Events")
+public class DynamoModel {
+
+    private String id;
+    private String principalId;
+    private String createdAt;
+    private Map<String, String> body;
+
+
+    @DynamoDBHashKey(attributeName = "id")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @DynamoDBAttribute(attributeName = "principalId")
+    public String getPrincipalId() {
+        return principalId;
+    }
+
+    public void setPrincipalId(String principalId) {
+        this.principalId = principalId;
+    }
+
+    @DynamoDBAttribute(attributeName = "createdAt")
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @DynamoDBAttribute(attributeName = "body")
+    public Map<String, String> getBody() {
+        return body;
+    }
+
+    public void setBody(Map<String, String> body) {
+        this.body = body;
+    }
+}
