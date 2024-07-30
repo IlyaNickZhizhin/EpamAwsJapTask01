@@ -1,0 +1,18 @@
+#!/bin/bash
+
+syndicate generate lambda --name uuid_generator --runtime java
+
+syndicate generate meta cloudwatch_event_rule \
+    --resource_name uuid_trigger \
+    --rule_type schedule \
+    --expression "rate(1 minute)" \
+    --region eu-central-1
+
+syndicate generate meta s3_bucket \
+    --resource_name uuid-storage \
+    --location eu-central-1 \
+    --acl private \
+    --block_public_acls true \
+    --ignore_public_acls true \
+    --block_public_policy true \
+    --restrict_public_buckets true
