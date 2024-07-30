@@ -1,5 +1,6 @@
+com\task05\mapper\ObjectContentMapper.class
 com\task05\model\DynamoModel.class
-com\task05\dto\ResponseEvent.class
+com\task05\dto\EventDto.class
 com\task05\ApiHandler.class
-com\task05\dto\Event.class
-com\task05\dto\RequestEvent.class
+com\task05\dto\RequestDto.class
+com\task05\dto\ResponseDto.class

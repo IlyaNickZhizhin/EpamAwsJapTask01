@@ -10,7 +10,7 @@ import java.util.Map;
 public class DynamoModel {
 
     private String id;
-    private String principalId;
+    private Integer principalId;
     private String createdAt;
     private Map<String, String> body;
 
@@ -25,11 +25,11 @@ public class DynamoModel {
     }
 
     @DynamoDBAttribute(attributeName = "principalId")
-    public String getPrincipalId() {
+    public Integer getPrincipalId() {
         return principalId;
     }
 
-    public void setPrincipalId(String principalId) {
+    public void setPrincipalId(Integer principalId) {
         this.principalId = principalId;
     }
 
