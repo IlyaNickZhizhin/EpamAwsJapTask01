@@ -99,7 +99,7 @@ public class AuditProducer implements RequestHandler<DynamodbEvent, Map<String, 
 		AuditUpdateEntity entity = new AuditUpdateEntity();
 		prepareEntity(image, entity);
 		log.log("prepared entity: " + gson.toJson(entity));
-		entity.setUpdatedAttribute(image.get("key").getS());
+		entity.setUpdatedAttribute("value");
 		entity.setOldValue(Integer.valueOf(oldImage.get("value").getN()));
 		entity.setNewValue(Integer.valueOf(image.get("value").getN()));
 		log.log("fulfilled entity: " + gson.toJson(entity));
