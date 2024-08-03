@@ -1,0 +1,35 @@
+{
+  "weather_api" : {
+    "name" : "weather_api",
+    "runtimes" : [ "java11" ],
+    "resource_type" : "lambda_layer",
+    "deployment_package" : "weather_api-assembly.zip",
+    "libraries" : [ "../task08Layer/target/task08Layer-1.0-SNAPSHOT.jar" ]
+  },
+  "weather_client" : {
+    "name" : "weather_client",
+    "lambda_path" : "C:\\Users\\ilya_zhizhin\\Documents\\Learning\\EpamAwsJapTask01\\task08",
+    "version" : "1.0.0",
+    "func_name" : "com.task08.WeatherClient",
+    "deployment_package" : "task08-1.0.0.jar",
+    "resource_type" : "lambda",
+    "runtime" : "java11",
+    "architectures" : [ "x86_64" ],
+    "iam_role_name" : "weather_client-role",
+    "memory" : 1024,
+    "timeout" : 300,
+    "subnet_ids" : [ ],
+    "security_group_ids" : [ ],
+    "dependencies" : [ ],
+    "event_sources" : [ ],
+    "env_variables" : { },
+    "publish_version" : true,
+    "alias" : "${lambdas_alias_name}",
+    "logs_expiration" : "${logs_expiration}",
+    "snap_start" : "None",
+    "url_config" : {
+      "auth_type" : "NONE",
+      "invoke_mode" : "BUFFERED"
+    }
+  }
+}
