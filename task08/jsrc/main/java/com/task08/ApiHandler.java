@@ -8,7 +8,7 @@ import com.syndicate.deployment.annotations.lambda.LambdaUrlConfig;
 import in.zhizh.WeatherRequest;
 
 @LambdaHandler(
-    lambdaName = "weather_client",
+    lambdaName = "api_handler",
 	roleName = "weather_client-role",
 	layers = {"weather_api"}
 )
@@ -16,7 +16,7 @@ import in.zhizh.WeatherRequest;
 		layerName = "weather_api",
 		libraries = {"lib/task08Layer-1.0-SNAPSHOT.jar"})
 @LambdaUrlConfig
-public class WeatherClient implements RequestHandler<Object, String> {
+public class ApiHandler implements RequestHandler<Object, String> {
 
 	public String handleRequest(Object request, Context context) {
 		return new WeatherRequest().request(context);
