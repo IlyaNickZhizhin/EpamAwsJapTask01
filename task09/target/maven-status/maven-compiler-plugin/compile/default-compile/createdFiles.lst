@@ -1,6 +1,7 @@
 com\task09\model\WeatherForecast.class
+com\task09\weahter\WeatherRequest.class
 com\task09\imports\Import.class
+com\task09\model\WeatherItem.class
 com\task09\model\HourlyForecast.class
 com\task09\Processor.class
 com\task09\model\HourlyUnits.class
-com\task09\model\WeatherItem.class

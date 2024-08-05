@@ -19,6 +19,7 @@
     } ],
     "event_sources" : [ ],
     "env_variables" : { },
+    "tracing_mode" : "Active",
     "publish_version" : false,
     "snap_start" : "None",
     "url_config" : {

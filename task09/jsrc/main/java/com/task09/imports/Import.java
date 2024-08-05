@@ -6,4 +6,6 @@ public interface Import {
     String POSTFIX = "-test";
     String TABLE_NAME = "Weather";
     String TABLE_FULL_NAME = PREFIX+TABLE_NAME+POSTFIX;
+
+
 }
