@@ -4,7 +4,7 @@
     "runtimes" : [ "java11" ],
     "resource_type" : "lambda_layer",
     "deployment_package" : "weather_api-assembly.zip",
-    "libraries" : [ "../task08Layer/target/task08Layer-1.0-SNAPSHOT.jar" ]
+    "libraries" : [ "lib/task08Layer-1.0-SNAPSHOT.jar" ]
   },
   "weather_client" : {
     "name" : "weather_client",
@@ -23,9 +23,8 @@
     "dependencies" : [ ],
     "event_sources" : [ ],
     "env_variables" : { },
-    "publish_version" : true,
-    "alias" : "${lambdas_alias_name}",
-    "logs_expiration" : "${logs_expiration}",
+    "publish_version" : false,
+    "layers" : [ "weather_api" ],
     "snap_start" : "None",
     "url_config" : {
       "auth_type" : "NONE",

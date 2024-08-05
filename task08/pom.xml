@@ -35,6 +35,8 @@
             <groupId>in.zhizh</groupId>
             <artifactId>task08Layer</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/task08Layer-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
     </dependencies>
 
