@@ -9,16 +9,14 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.syndicate.deployment.annotations.lambda.LambdaHandler;
 import com.syndicate.deployment.annotations.lambda.LambdaUrlConfig;
 import com.syndicate.deployment.annotations.resources.DependsOn;
 import com.syndicate.deployment.model.ResourceType;
-import com.syndicate.deployment.model.RetentionSetting;
 import com.task09.imports.Import;
 import com.task09.model.WeatherForecast;
 import com.task09.model.WeatherItem;
-import in.zhizh.WeatherRequest;
+import com.task09.weahter.WeatherRequest;
 
 import java.util.HashMap;
 import java.util.Map;
