@@ -1,14 +1,15 @@
 package com.task10.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.task10.imports.Import;
 import lombok.Data;
+import lombok.Setter;
 
+@Setter
 @DynamoDBTable(tableName = Import.Reservations_TABLE_FULL_NAME)
-@Data
 public class Reservation {
-
     @DynamoDBHashKey(attributeName = "id")
     private String id;
     private int tableNumber;
@@ -17,5 +18,40 @@ public class Reservation {
     private String date;
     private String slotTimeStart;
     private String slotTimeEnd;
+
+    @DynamoDBAttribute(attributeName = "tableNumber")
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    @DynamoDBHashKey(attributeName = "id")
+    public String getId() {
+        return id;
+    }
+
+    @DynamoDBAttribute(attributeName = "clientName")
+    public String getClientName() {
+        return clientName;
+    }
+
+    @DynamoDBAttribute(attributeName = "phoneNumber")
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    @DynamoDBAttribute(attributeName = "date")
+    public String getDate() {
+        return date;
+    }
+
+    @DynamoDBAttribute(attributeName = "slotTimeStart")
+    public String getSlotTimeStart() {
+        return slotTimeStart;
+    }
+
+    @DynamoDBAttribute(attributeName = "slotTimeEnd")
+    public String getSlotTimeEnd() {
+        return slotTimeEnd;
+    }
 
 }
