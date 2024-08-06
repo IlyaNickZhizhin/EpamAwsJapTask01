@@ -81,9 +81,14 @@ public class TableDao {
         context.getLogger().log("Table: " + Import.Tables_TABLE_FULL_NAME + " found");
         GetItemSpec getItemSpec = new GetItemSpec().withPrimaryKey("id", tableId);
         Item item = tableItem.getItem(getItemSpec);
+        context.getLogger().log("Table item is" + item);
         Table table = new Table();
         table.setId(item.getString("id"));
-        table.setVip((item.getBoolean("isVip")));
+        try {
+            table.setVip((item.getBoolean("isVip")));
+        } catch (Exception e) {
+            table.setVip((item.getInt("isVip")) != 0);
+        }
         table.setNumber(item.getInt("number"));
         table.setMinOrder(item.getInt("minOrder"));
         table.setPlaces(item.getInt("places"));

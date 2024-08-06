@@ -11,6 +11,7 @@ com\task10\dto\TableCreateRequest.class
 com\task10\dto\TableDto.class
 com\task10\service\TableService.class
 com\task10\service\CognitoService.class
+com\task10\dto\ReservationVerify.class
 com\task10\dao\ReservationDao.class
 com\task10\dto\ReservationsResponse.class
 com\task10\ApiHandler.class
