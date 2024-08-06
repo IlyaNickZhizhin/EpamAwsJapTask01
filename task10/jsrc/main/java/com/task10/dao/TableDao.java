@@ -8,11 +8,9 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
 import com.amazonaws.services.lambda.runtime.Context;
-import com.task10.dto.TablesResponse;
 import com.task10.imports.Import;
 import com.task10.model.Table;
 import lombok.Getter;
-import software.amazon.awssdk.services.cognitoidentityprovider.endpoints.internal.Value;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -52,7 +50,6 @@ public class TableDao {
         com.amazonaws.services.dynamodbv2.document.Table table = getDynamoDB().getTable(Import.Tables_TABLE_FULL_NAME);
         context.getLogger().log("Table: " + Import.Tables_TABLE_FULL_NAME + " found");
         Iterator<Item> iterator = table.scan().iterator();
-        TablesResponse response = new TablesResponse();
         ArrayList<Table> tables = new ArrayList<>();
         int counter = 0;
         while (iterator.hasNext()) {
@@ -79,7 +76,7 @@ public class TableDao {
         DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
         com.amazonaws.services.dynamodbv2.document.Table tableItem = dynamoDB.getTable(Import.Tables_TABLE_FULL_NAME);
         context.getLogger().log("Table: " + Import.Tables_TABLE_FULL_NAME + " found");
-        GetItemSpec getItemSpec = new GetItemSpec().withPrimaryKey("id", tableId);
+        GetItemSpec getItemSpec = new GetItemSpec().withPrimaryKey("id", String.valueOf(tableId));
         Item item = tableItem.getItem(getItemSpec);
         context.getLogger().log("Table item is" + item);
         Table table = new Table();
