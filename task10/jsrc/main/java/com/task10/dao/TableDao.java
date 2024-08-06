@@ -12,6 +12,7 @@ import com.task10.dto.TablesResponse;
 import com.task10.imports.Import;
 import com.task10.model.Table;
 import lombok.Getter;
+import software.amazon.awssdk.services.cognitoidentityprovider.endpoints.internal.Value;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -58,7 +59,7 @@ public class TableDao {
             counter++;
             Item item = iterator.next();
             Table tableItem = new Table();
-            tableItem.setId(item.getInt("id"));
+            tableItem.setId(item.getString("id"));
             tableItem.setNumber(item.getInt("number"));
             tableItem.setPlaces(item.getInt("places"));
             tableItem.setVip((item.getBoolean("isVip")));
@@ -77,7 +78,7 @@ public class TableDao {
         GetItemSpec getItemSpec = new GetItemSpec().withPrimaryKey("id", tableId);
         Item item = tableItem.getItem(getItemSpec);
         Table table = new Table();
-        table.setId(item.getInt("id"));
+        table.setId(item.getString("id"));
         table.setVip((item.getBoolean("isVip")));
         table.setNumber(item.getInt("number"));
         table.setMinOrder(item.getInt("minOrder"));
@@ -85,7 +86,7 @@ public class TableDao {
         return table;
     }
 
-    public int createTable(Context context, Table table) {
+    public String createTable(Context context, Table table) {
         context.getLogger().log("createTable - in DAO");
         getDynamoDBMapper().save(table);
         context.getLogger().log("Table:" + table + "saved to dynamoDB");

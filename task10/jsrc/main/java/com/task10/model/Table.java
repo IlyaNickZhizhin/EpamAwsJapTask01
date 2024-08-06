@@ -6,18 +6,19 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.task10.imports.Import;
 import lombok.Data;
 import lombok.Setter;
+import software.amazon.awssdk.services.cognitoidentityprovider.endpoints.internal.Value;
 
 @DynamoDBTable(tableName = Import.Tables_TABLE_FULL_NAME)
 @Setter
 public class Table {
-    private int id;
+    private String id;
     private int number;
     private int places;
     private boolean isVip;
     private int minOrder;
 
     @DynamoDBHashKey(attributeName = "id")
-    public int getId() {
+    public String getId() {
         return id;
     }
 
