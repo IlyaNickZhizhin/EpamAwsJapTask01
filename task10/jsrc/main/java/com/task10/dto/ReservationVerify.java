@@ -2,7 +2,6 @@ package com.task10.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import software.amazon.awssdk.utils.Pair;
 
 import java.time.LocalTime;
 
@@ -10,6 +9,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class ReservationVerify {
     int tableNumber;
+    LocalTime date;
     LocalTime startTime;
     LocalTime endTime;
 }
