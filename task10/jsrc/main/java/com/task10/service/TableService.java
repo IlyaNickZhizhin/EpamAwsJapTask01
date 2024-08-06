@@ -10,7 +10,10 @@ import com.task10.dto.TableCreateResponse;
 import com.task10.dto.TableDetailsResponse;
 import com.task10.dto.TablesResponse;
 import com.task10.mapper.DtoMapper;
+import com.task10.model.Table;
 import lombok.Getter;
+
+import java.util.List;
 
 public class TableService {
 
@@ -23,7 +26,7 @@ public class TableService {
     public APIGatewayProxyResponseEvent getAllTables(Context context){
         context.getLogger().log("getAllTables in service");
         try {
-            TablesResponse response = mapper.tableToTablesResponse(tableDao.getAllTables(context));
+            TablesResponse response = mapper.tablesToTablesResponse(getListTables(context));
             context.getLogger().log("Tables founded" + gson.toJson(response));
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(response));
         } catch (Exception e) {
@@ -61,5 +64,9 @@ public class TableService {
                     .withStatusCode(400).withBody("There was an error in the request" + e.getMessage());
         }
     };
+
+    List<Table> getListTables(Context context){
+        return tableDao.getAllTables(context);
+    }
 
 }

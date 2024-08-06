@@ -8,10 +8,16 @@ import com.task10.dao.ReservationDao;
 import com.task10.dto.ReservationCreateRequest;
 import com.task10.dto.ReservationCreateResponse;
 import com.task10.dto.ReservationDto;
+import com.task10.dto.ReservationVerify;
 import com.task10.dto.ReservationsResponse;
 import com.task10.mapper.DtoMapper;
+import com.task10.model.Reservation;
+import com.task10.model.Table;
 import lombok.Getter;
+import software.amazon.awssdk.utils.Pair;
 
+import java.time.LocalTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReservationService {
@@ -21,34 +27,77 @@ public class ReservationService {
     private final ReservationDao dao = ReservationDao.getInstance();
     private final DtoMapper mapper = DtoMapper.getINSTANCE();
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final TableService tableService = TableService.getInstance();
 
     public APIGatewayProxyResponseEvent createReservation(ReservationCreateRequest request, Context context){
         context.getLogger().log("createReservation - in service");
         try {
+            isTableExistAndAvailable(request, context);
             ReservationCreateResponse response = new ReservationCreateResponse();
             response.setReservationId(dao.createReservation(context, mapper.reservationCreateRequestToReservation(request)));
             context.getLogger().log("createReservation done with reservationId " + response.getReservationId());
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(response));
         } catch (Exception e) {
             context.getLogger().log("createReservation done with error " + e.getMessage());
-            return new APIGatewayProxyResponseEvent()
-                    .withStatusCode(400)
-                    .withBody("There was an error in the request. Possible reasons include invalid input," +
-                            " table not found, or conflicting reservations." + e.getMessage());
+            return failedResponse(e.getMessage());
         }
     };
     public APIGatewayProxyResponseEvent getAllReservations(Context context) {
         context.getLogger().log("getAllReservations - in service");
         try {
-            ReservationsResponse response = mapper.reservationToReservationsResponse(dao.getAllReservations(context));
+            ReservationsResponse response = mapper.reservationToReservationsResponse(getReservations(context));
             context.getLogger().log("getAllReservations done with reservations"
                     + response.getReservations().stream()
-                    .map(ReservationDto::getId));
-            return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(response));
+                    .map(ReservationDto::getId).collect(Collectors.toList()));
+            return successResponse(response);
         } catch (Exception e) {
             context.getLogger().log("getAllReservations with error " + e.getMessage());
-            return new APIGatewayProxyResponseEvent()
-                    .withStatusCode(400).withBody("There was an error in the request." + e.getMessage());
+            return failedResponse(e.getMessage());
         }
     };
+
+    private List<Reservation> getReservations(Context context){
+        return dao.getAllReservations(context);
+    }
+
+    private APIGatewayProxyResponseEvent successResponse(Object dto){
+        return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(dto));
+    }
+
+    private APIGatewayProxyResponseEvent failedResponse(String message){
+        return new APIGatewayProxyResponseEvent()
+                .withStatusCode(400).withBody("There was an error in the request." + message);
+    }
+
+    public void isTableExistAndAvailable(ReservationCreateRequest newRequest, Context context) throws Exception {
+        String reservationExceptionMessage = "There was an error in the request. " +
+                "Possible reasons include invalid input, table not found, or conflicting reservations.";
+        List<Integer> existingTable = tableService.getListTables(context)
+                .stream().map(Table::getNumber).collect(Collectors.toList());
+        if (!existingTable.contains(newRequest.getTableNumber())){
+            throw new Exception(reservationExceptionMessage);
+        }
+        List<ReservationVerify> existingReserves = getReservations(context)
+                .stream()
+                .map(r ->
+                        new ReservationVerify(r.getTableNumber(),
+                                LocalTime.parse(r.getSlotTimeStart()),
+                                LocalTime.parse(r.getSlotTimeEnd()))
+                ).collect(Collectors.toList());
+        LocalTime newRequestStartTime = LocalTime.parse(newRequest.getSlotTimeStart());
+        LocalTime newRequestEndTime = LocalTime.parse(newRequest.getSlotTimeEnd());
+        for (ReservationVerify reservation : existingReserves) {
+            if (reservation.getTableNumber() == newRequest.getTableNumber()) {
+                if (isOverlapping(newRequestStartTime, newRequestEndTime, reservation.getStartTime(), reservation.getEndTime())) {
+                    throw new Exception(reservationExceptionMessage);
+                }
+            }
+        }
+    }
+    private boolean isOverlapping(LocalTime start1, LocalTime end1, LocalTime start2, LocalTime end2) {
+        return start1.isBefore(end2) && start2.isBefore(end1);
+    }
+
+
+
 }

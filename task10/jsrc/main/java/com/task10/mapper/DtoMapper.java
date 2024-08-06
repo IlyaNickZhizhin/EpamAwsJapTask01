@@ -40,7 +40,7 @@ public class DtoMapper {
         return table;
     };
 
-    public TablesResponse tableToTablesResponse(List<Table> tables){
+    public TablesResponse tablesToTablesResponse(List<Table> tables){
         TablesResponse tablesResponse = new TablesResponse();
         List<TableDto> tableDtos = new ArrayList<>();
         for (Table table : tables) {

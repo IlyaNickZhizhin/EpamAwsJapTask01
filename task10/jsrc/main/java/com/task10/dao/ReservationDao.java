@@ -48,7 +48,7 @@ public class ReservationDao {
     public List<Reservation> getAllReservations(Context context) {
         context.getLogger().log("getAllReservations");
         com.amazonaws.services.dynamodbv2.document.Table table = getDynamoDB().getTable(Import.Reservations_TABLE_FULL_NAME);
-        context.getLogger().log("Table:" + Import.Reservations_TABLE_FULL_NAME + "found");
+        context.getLogger().log("Reservations table :" + Import.Reservations_TABLE_FULL_NAME + " found");
         Iterator<Item> iterator = table.scan().iterator();
         TablesResponse response = new TablesResponse();
         ArrayList<Reservation> reservations = new ArrayList<>();
@@ -66,7 +66,7 @@ public class ReservationDao {
             reservationItem.setTableNumber(item.getInt("tableNumber"));
             reservations.add(reservationItem);
         }
-        context.getLogger().log((String.format("Reservations: %s contains %s tables", Import.Reservations_TABLE_FULL_NAME , counter)));
+        context.getLogger().log((String.format("Reservations: %s contains %s reservations", Import.Reservations_TABLE_FULL_NAME , counter)));
         return reservations;
     }
 
