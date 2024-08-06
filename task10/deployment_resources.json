@@ -200,7 +200,7 @@
     "resource_type": "cognito_idp",
     "region": "eu-central-1",
     "password_policy": {
-      "minimum_length": 8
+      "require_symbols": false
     },
     "client": {
       "client_name": "client-app",
