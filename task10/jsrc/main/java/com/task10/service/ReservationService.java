@@ -15,6 +15,7 @@ import com.task10.model.Reservation;
 import com.task10.model.Table;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -83,11 +84,11 @@ public class ReservationService {
                 .stream()
                 .map(r ->
                         new ReservationVerify(r.getTableNumber(),
-                                LocalTime.parse(r.getDate(), DATE_FORMATTER),
+                                LocalDate.parse(r.getDate(), DATE_FORMATTER),
                                 LocalTime.parse(r.getSlotTimeStart(), TIME_FORMATTER),
                                 LocalTime.parse(r.getSlotTimeEnd(), TIME_FORMATTER))
                 ).collect(Collectors.toList());
-        LocalTime newRequestDate = LocalTime.parse(newRequest.getDate(), DATE_FORMATTER);
+        LocalDate newRequestDate = LocalDate.parse(newRequest.getDate(), DATE_FORMATTER);
         LocalTime newRequestStartTime = LocalTime.parse(newRequest.getSlotTimeStart(), TIME_FORMATTER);
         LocalTime newRequestEndTime = LocalTime.parse(newRequest.getSlotTimeEnd(), TIME_FORMATTER);
         for (ReservationVerify reservation : existingReserves) {
@@ -98,7 +99,7 @@ public class ReservationService {
             }
         }
     }
-    private boolean isOverlapping(LocalTime date1, LocalTime start1, LocalTime end1, LocalTime date2, LocalTime start2, LocalTime end2) {
+    private boolean isOverlapping(LocalDate date1, LocalTime start1, LocalTime end1, LocalDate date2, LocalTime start2, LocalTime end2) {
         return date1.equals(date2) && (start1.isBefore(end2) && start2.isBefore(end1));
     }
 
