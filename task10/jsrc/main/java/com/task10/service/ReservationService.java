@@ -70,7 +70,7 @@ public class ReservationService {
     }
 
     public void isTableExistAndAvailable(ReservationCreateRequest newRequest, Context context) throws Exception {
-        DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy:MM:dd");
+        DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
         String reservationExceptionMessage = "There was an error in the request. " +
                 "Possible reasons include invalid input, table not found, or conflicting reservations.";
