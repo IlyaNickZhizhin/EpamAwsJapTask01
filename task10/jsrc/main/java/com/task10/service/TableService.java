@@ -53,7 +53,7 @@ public class TableService {
         try {
             context.getLogger().log("createTable in Service");
             TableCreateResponse response = new TableCreateResponse();
-            response.setId(tableDao.createTable(context, mapper.TableCreateRequestToTable(request)));
+            response.setId(Integer.parseInt(tableDao.createTable(context, mapper.TableCreateRequestToTable(request))));
             context.getLogger().log("createTable response: " + response);
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(response));
         } catch (Exception e) {

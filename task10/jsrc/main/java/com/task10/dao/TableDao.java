@@ -50,7 +50,7 @@ public class TableDao {
     public List<Table> getAllTables(Context context) {
         context.getLogger().log("getAllTables");
         com.amazonaws.services.dynamodbv2.document.Table table = getDynamoDB().getTable(Import.Tables_TABLE_FULL_NAME);
-        context.getLogger().log("Table:" + Import.Tables_TABLE_FULL_NAME + "found");
+        context.getLogger().log("Table: " + Import.Tables_TABLE_FULL_NAME + " found");
         Iterator<Item> iterator = table.scan().iterator();
         TablesResponse response = new TablesResponse();
         ArrayList<Table> tables = new ArrayList<>();
@@ -74,7 +74,7 @@ public class TableDao {
         context.getLogger().log("getTableById");
         DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
         com.amazonaws.services.dynamodbv2.document.Table tableItem = dynamoDB.getTable(Import.Tables_TABLE_FULL_NAME);
-        context.getLogger().log("Table:" + Import.Tables_TABLE_FULL_NAME + "found");
+        context.getLogger().log("Table: " + Import.Tables_TABLE_FULL_NAME + " found");
         GetItemSpec getItemSpec = new GetItemSpec().withPrimaryKey("id", tableId);
         Item item = tableItem.getItem(getItemSpec);
         Table table = new Table();

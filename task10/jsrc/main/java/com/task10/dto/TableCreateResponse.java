@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class TableCreateResponse {
-    private String id;
+    private int id;
 }
