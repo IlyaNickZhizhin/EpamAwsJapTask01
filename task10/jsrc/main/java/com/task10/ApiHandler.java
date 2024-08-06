@@ -27,9 +27,9 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
 		context.getLogger().log("APIGatewayProxyRequestEvent with pass" + request.getPath());
 
-		if (request.getResource().contains("tables")
-				&& (request.getResource().split("/").length > 1)) {
-			return controller.tablesGET(Integer.parseInt(request.getResource().split("/")[1]), context);
+		if (request.getResource().contains("/tables/")
+				&& (request.getResource().split("/").length > 2)) {
+			return controller.tablesGET(Integer.parseInt(request.getResource().split("/")[2]), context);
 		}
 		switch (request.getResource()) {
 			case "/signup" : return controller.signupPOST(request.getBody(), context);
