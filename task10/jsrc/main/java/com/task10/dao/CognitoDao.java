@@ -1,25 +1,21 @@
 package com.task10.dao;
 
-import com.amazonaws.services.lambda.runtime.Context;
 import com.task10.dto.SignInRequest;
 import com.task10.dto.SignUpRequest;
 import lombok.Getter;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminCreateUserRequest;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminCreateUserResponse;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminConfirmSignUpRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminInitiateAuthRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminInitiateAuthResponse;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeType;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AuthFlowType;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.CognitoIdentityProviderException;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.DeliveryMediumType;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.ListUserPoolClientsRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.ListUserPoolClientsResponse;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.ListUserPoolsRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.ListUserPoolsResponse;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminConfirmSignUpRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +70,8 @@ public class CognitoDao {
     public void cognitoSignUp(SignUpRequest request) {
 
         AttributeType userAttrs = AttributeType.builder()
-                .name("name").value(request.getFirstName())
+                .name("first_name").value(request.getFirstName())
+                .name("last_name").value(request.getLastName())
                 .name("email").value(request.getEmail())
                 .build();
 
@@ -86,9 +83,9 @@ public class CognitoDao {
                     signUpRequest =
                     software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest
                             .builder()
+                            .clientId(getClientId())
                             .userAttributes(userAttrsList)
                             .username(request.getEmail())
-                            .clientId(getClientId())
                             .password(request.getPassword()).build();
             cognitoClient.signUp(signUpRequest);
             AdminConfirmSignUpRequest confirmSignUpRequest = AdminConfirmSignUpRequest.builder()
