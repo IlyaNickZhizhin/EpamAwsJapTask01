@@ -62,7 +62,11 @@ public class TableDao {
             tableItem.setId(item.getString("id"));
             tableItem.setNumber(item.getInt("number"));
             tableItem.setPlaces(item.getInt("places"));
-            tableItem.setVip((item.getBoolean("isVip")));
+            try {
+                tableItem.setVip((item.getBoolean("isVip")));
+            } catch (Exception e) {
+                tableItem.setVip((item.getInt("isVip")) != 0);
+            }
             tableItem.setMinOrder(item.getInt("minOrder"));
             tables.add(tableItem);
         }
