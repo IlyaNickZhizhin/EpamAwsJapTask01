@@ -5,6 +5,7 @@ C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dao\TableDao.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\ReservationCreateRequest.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\ReservationCreateResponse.java
+C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\ReservationDto.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\ReservationsResponse.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\SignInRequest.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\SignInResponse.java
@@ -13,6 +14,7 @@ C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\TableCreateRequest.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\TableCreateResponse.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\TableDetailsResponse.java
+C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\TableDto.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\dto\TablesResponse.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\imports\Import.java
 C:\Users\ilya_zhizhin\Documents\Learning\EpamAwsJapTask01\task10\jsrc\main\java\com\task10\mapper\DtoMapper.java

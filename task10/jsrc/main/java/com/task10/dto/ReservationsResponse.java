@@ -7,5 +7,5 @@ import java.util.List;
 
 @Data
 public class ReservationsResponse {
-    private List<Reservation> reservations;
+    private List<ReservationDto> reservations;
 }

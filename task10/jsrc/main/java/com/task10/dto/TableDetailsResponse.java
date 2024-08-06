@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class TableDetailsResponse {
-    private Table table;
+    private TableDto table;
 }

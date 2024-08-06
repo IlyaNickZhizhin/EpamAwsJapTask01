@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class TablesResponse {
 
-    private List<Table> tables;
+    private List<TableDto> tables;
 }

@@ -5,7 +5,7 @@ import software.amazon.awssdk.services.cognitoidentityprovider.endpoints.interna
 
 @Data
 public class TableCreateRequest {
-    private String id;
+    private int id;
     private int number;
     private int places;
     private boolean isVip;

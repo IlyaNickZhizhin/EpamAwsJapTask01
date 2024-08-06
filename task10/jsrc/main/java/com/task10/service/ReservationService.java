@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.task10.dao.ReservationDao;
 import com.task10.dto.ReservationCreateRequest;
 import com.task10.dto.ReservationCreateResponse;
+import com.task10.dto.ReservationDto;
 import com.task10.dto.ReservationsResponse;
 import com.task10.mapper.DtoMapper;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class ReservationService {
         context.getLogger().log("createReservation - in service");
         try {
             ReservationCreateResponse response = new ReservationCreateResponse();
-            response.setReservationId(dao.createReservation(context, mapper.reservationCreateRequestToReservation(request)));
+            response.setReservationId(Integer.parseInt(dao.createReservation(context, mapper.reservationCreateRequestToReservation(request))));
             context.getLogger().log("createReservation done with reservationId " + response.getReservationId());
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(response));
         } catch (Exception e) {
@@ -39,11 +40,10 @@ public class ReservationService {
     public APIGatewayProxyResponseEvent getAllReservations(Context context) {
         context.getLogger().log("getAllReservations - in service");
         try {
-            ReservationsResponse response = new ReservationsResponse();
-            response.setReservations(dao.getAllReservations(context));
+            ReservationsResponse response = mapper.reservationToReservationsResponse(dao.getAllReservations(context));
             context.getLogger().log("getAllReservations done with reservations"
                     + response.getReservations().stream()
-                    .map(r -> r.getId()).collect(Collectors.joining(", ")));
+                    .map(ReservationDto::getId));
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(response));
         } catch (Exception e) {
             context.getLogger().log("getAllReservations with error " + e.getMessage());
