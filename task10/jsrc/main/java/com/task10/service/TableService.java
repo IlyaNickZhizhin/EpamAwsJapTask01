@@ -39,8 +39,7 @@ public class TableService {
     public APIGatewayProxyResponseEvent getTable(int tableId, Context context){
         context.getLogger().log("getTable in service");
         try {
-            TableDetailsResponse table =  new TableDetailsResponse();
-            table.setTable(mapper.tableToTableDto(tableDao.getTableById(context, tableId)));
+            TableDetailsResponse table =  mapper.tableDetailsResponseToTableDto(tableDao.getTableById(context, tableId));
             context.getLogger().log("Table founded:" + table);
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(table));
         } catch (Exception e) {
@@ -49,7 +48,7 @@ public class TableService {
             return new APIGatewayProxyResponseEvent()
                     .withStatusCode(400).withBody("There was an error in the request" + e.getMessage());
         }
-    };
+    }
 
     public APIGatewayProxyResponseEvent createTable(TableCreateRequest request, Context context) {
         try {
@@ -63,7 +62,7 @@ public class TableService {
             return new APIGatewayProxyResponseEvent()
                     .withStatusCode(400).withBody("There was an error in the request" + e.getMessage());
         }
-    };
+    }
 
     List<Table> getListTables(Context context){
         return tableDao.getAllTables(context);

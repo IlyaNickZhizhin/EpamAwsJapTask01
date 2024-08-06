@@ -6,6 +6,7 @@ import com.task10.dto.ReservationsResponse;
 import com.task10.dto.SignInRequest;
 import com.task10.dto.SignUpRequest;
 import com.task10.dto.TableCreateRequest;
+import com.task10.dto.TableDetailsResponse;
 import com.task10.dto.TableDto;
 import com.task10.dto.TablesResponse;
 import com.task10.model.Reservation;
@@ -28,7 +29,7 @@ public class DtoMapper {
         signInRequest.setEmail(signUpRequest.getEmail());
         signInRequest.setPassword(signUpRequest.getPassword());
         return signInRequest;
-    };
+    }
 
     public Table TableCreateRequestToTable(TableCreateRequest tableCreateRequest){
         Table table = new Table();
@@ -38,7 +39,7 @@ public class DtoMapper {
         table.setVip(tableCreateRequest.isVip());
         table.setMinOrder(tableCreateRequest.getMinOrder());
         return table;
-    };
+    }
 
     public TablesResponse tablesToTablesResponse(List<Table> tables){
         TablesResponse tablesResponse = new TablesResponse();
@@ -48,7 +49,7 @@ public class DtoMapper {
         }
         tablesResponse.setTables(tableDtos);
         return tablesResponse;
-    };
+    }
 
     public TableDto tableToTableDto(Table table){
         TableDto tableDto = new TableDto();
@@ -71,7 +72,7 @@ public class DtoMapper {
         reservation.setSlotTimeEnd(reservationCreateRequest.getSlotTimeEnd());
         reservation.setSlotTimeStart(reservationCreateRequest.getSlotTimeStart());
         return reservation;
-    };
+    }
 
     public ReservationsResponse reservationToReservationsResponse(List<Reservation> reservations){
         ReservationsResponse reservationsResponse = new ReservationsResponse();
@@ -79,18 +80,19 @@ public class DtoMapper {
         for (Reservation reservation : reservations) {
             reservationDtos.add(ReservationToReservationDto(reservation));
         }
+        reservationsResponse.setReservations(reservationDtos);
         return reservationsResponse;
     }
 
     public ReservationDto ReservationToReservationDto(Reservation reservation){
         ReservationDto reservationDto = new ReservationDto();
-        reservationDto.setId(reservationDto.getId());
-        reservationDto.setTableNumber(reservationDto.getTableNumber());
-        reservationDto.setDate(reservationDto.getDate());
-        reservationDto.setClientName(reservationDto.getClientName());
-        reservationDto.setPhoneNumber(reservationDto.getPhoneNumber());
-        reservationDto.setSlotTimeEnd(reservationDto.getSlotTimeEnd());
-        reservationDto.setSlotTimeStart(reservationDto.getSlotTimeStart());
+        reservationDto.setId(reservation.getId());
+        reservationDto.setTableNumber(reservation.getTableNumber());
+        reservationDto.setDate(reservation.getDate());
+        reservationDto.setClientName(reservation.getClientName());
+        reservationDto.setPhoneNumber(reservation.getPhoneNumber());
+        reservationDto.setSlotTimeEnd(reservation.getSlotTimeEnd());
+        reservationDto.setSlotTimeStart(reservation.getSlotTimeStart());
         return reservationDto;
     }
 
@@ -98,4 +100,13 @@ public class DtoMapper {
         return UUID.randomUUID().toString();
     }
 
+    public TableDetailsResponse tableDetailsResponseToTableDto(Table table) {
+        TableDetailsResponse tableDetailsResponse = new TableDetailsResponse();
+        tableDetailsResponse.setId(Integer.parseInt(table.getId()));
+        tableDetailsResponse.setPlaces(table.getPlaces());
+        tableDetailsResponse.setNumber(table.getNumber());
+        tableDetailsResponse.setVip(table.isVip());
+        tableDetailsResponse.setMinOrder(table.getMinOrder());
+        return tableDetailsResponse;
+    }
 }
