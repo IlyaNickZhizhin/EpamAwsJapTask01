@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @DynamoDBTable(tableName = Import.Reservations_TABLE_FULL_NAME)
 public class Reservation {
-    @DynamoDBHashKey(attributeName = "id")
     private String id;
     private int tableNumber;
     private String clientName;
@@ -19,14 +18,14 @@ public class Reservation {
     private String slotTimeStart;
     private String slotTimeEnd;
 
-    @DynamoDBAttribute(attributeName = "tableNumber")
-    public int getTableNumber() {
-        return tableNumber;
-    }
-
     @DynamoDBHashKey(attributeName = "id")
     public String getId() {
         return id;
+    }
+
+    @DynamoDBAttribute(attributeName = "tableNumber")
+    public int getTableNumber() {
+        return tableNumber;
     }
 
     @DynamoDBAttribute(attributeName = "clientName")

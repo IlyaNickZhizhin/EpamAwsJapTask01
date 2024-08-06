@@ -10,7 +10,6 @@ import lombok.Setter;
 @DynamoDBTable(tableName = Import.Tables_TABLE_FULL_NAME)
 @Setter
 public class Table {
-    @DynamoDBHashKey(attributeName = "id")
     private int id;
     private int number;
     private int places;

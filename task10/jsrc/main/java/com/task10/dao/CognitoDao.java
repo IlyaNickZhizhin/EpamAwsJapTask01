@@ -45,7 +45,7 @@ public class CognitoDao {
             ListUserPoolsRequest listUserPoolsRequest = ListUserPoolsRequest.builder().build();
             ListUserPoolsResponse userPoolsResponse = cognitoClient.listUserPools(listUserPoolsRequest);
             userPoolId = userPoolsResponse.userPools().stream().filter(p -> p.name().equals(Import.COGNITO_USER_POOL_FULL_NAME)).findFirst().get().id();
-            return null;
+            return userPoolId;
         } else return userPoolId;
     }
 
