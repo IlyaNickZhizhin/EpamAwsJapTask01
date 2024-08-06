@@ -25,7 +25,7 @@ public class CognitoService {
     public APIGatewayProxyResponseEvent signup(SignUpRequest request, Context context){
         context.getLogger().log(String.format("SignUp request: %s", request.toString()));
         try {
-            dao.cognitoSignUp(request);
+            dao.cognitoSignUp(request, context);
             context.getLogger().log(String.format("SignUp response: %s", "SUCSESS"));
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody("");
         } catch (CognitoIdentityProviderException e) {
@@ -36,7 +36,7 @@ public class CognitoService {
     public APIGatewayProxyResponseEvent signin(SignInRequest request, Context context){
         context.getLogger().log(String.format("SignIn request: %s", request.toString()));
         try {
-            AdminInitiateAuthResponse authResponse = dao.cognitoSignIn(request);
+            AdminInitiateAuthResponse authResponse = dao.cognitoSignIn(request, context);
             context.getLogger().log(String.format("SignIn response: SUCCESS"));
             SignInResponse response = new SignInResponse();
             context.getLogger().log(String.format("SignIn response: %s", authResponse.toString()));
