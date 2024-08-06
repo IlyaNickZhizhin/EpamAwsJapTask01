@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class ReservationCreateResponse {
-    private int reservationId;
+    private String reservationId;
 }

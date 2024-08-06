@@ -40,16 +40,17 @@ public class DtoMapper {
         return table;
     };
 
-    public TablesResponse TableToTablesResponse(List<Table> tables){
+    public TablesResponse tableToTablesResponse(List<Table> tables){
         TablesResponse tablesResponse = new TablesResponse();
         List<TableDto> tableDtos = new ArrayList<>();
         for (Table table : tables) {
-            tableDtos.add(TableToTableDto(table));
+            tableDtos.add(tableToTableDto(table));
         }
+        tablesResponse.setTables(tableDtos);
         return tablesResponse;
     };
 
-    public TableDto TableToTableDto(Table table){
+    public TableDto tableToTableDto(Table table){
         TableDto tableDto = new TableDto();
         tableDto.setId(Integer.parseInt(table.getId()));
         tableDto.setPlaces(table.getPlaces());

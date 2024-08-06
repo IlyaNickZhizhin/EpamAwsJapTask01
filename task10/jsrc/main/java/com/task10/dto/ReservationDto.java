@@ -1,10 +1,11 @@
 package com.task10.dto;
 
 import lombok.Data;
+import software.amazon.awssdk.services.cognitoidentityprovider.endpoints.internal.Value;
 
 @Data
 public class ReservationDto {
-    private int id;
+    private String id;
     private int tableNumber;
     private String clientName;
     private String phoneNumber;

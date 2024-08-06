@@ -26,7 +26,7 @@ public class ReservationService {
         context.getLogger().log("createReservation - in service");
         try {
             ReservationCreateResponse response = new ReservationCreateResponse();
-            response.setReservationId(Integer.parseInt(dao.createReservation(context, mapper.reservationCreateRequestToReservation(request))));
+            response.setReservationId(dao.createReservation(context, mapper.reservationCreateRequestToReservation(request)));
             context.getLogger().log("createReservation done with reservationId " + response.getReservationId());
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(response));
         } catch (Exception e) {

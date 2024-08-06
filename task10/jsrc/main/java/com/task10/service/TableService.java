@@ -23,7 +23,7 @@ public class TableService {
     public APIGatewayProxyResponseEvent getAllTables(Context context){
         context.getLogger().log("getAllTables in service");
         try {
-            TablesResponse response = mapper.TableToTablesResponse(tableDao.getAllTables(context));
+            TablesResponse response = mapper.tableToTablesResponse(tableDao.getAllTables(context));
             context.getLogger().log("Tables founded" + gson.toJson(response));
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(response));
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class TableService {
         context.getLogger().log("getTable in service");
         try {
             TableDetailsResponse table =  new TableDetailsResponse();
-            table.setTable(mapper.TableToTableDto(tableDao.getTableById(context, tableId)));
+            table.setTable(mapper.tableToTableDto(tableDao.getTableById(context, tableId)));
             context.getLogger().log("Table founded:" + table);
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(gson.toJson(table));
         } catch (Exception e) {
