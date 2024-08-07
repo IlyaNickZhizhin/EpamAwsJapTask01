@@ -107,7 +107,7 @@
     "global_indexes": [],
     "autoscaling": []
   },
-  "${s3_bucket}": {
+  "api-ui-hoster": {
     "resource_type": "s3_bucket",
     "acl": "public-read",
     "location": "eu-central-1",
