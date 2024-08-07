@@ -106,5 +106,18 @@
     "write_capacity": 1,
     "global_indexes": [],
     "autoscaling": []
+  },
+  "${s3_bucket}": {
+    "resource_type": "s3_bucket",
+    "acl": "public-read",
+    "location": "eu-central-1",
+    "cors": [],
+    "policy": {},
+    "public_access_block": {
+      "block_public_acls": false,
+      "ignore_public_acls": false,
+      "block_public_policy": false,
+      "restrict_public_buckets": false
+    }
   }
 }
