@@ -4,14 +4,9 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.syndicate.deployment.annotations.lambda.LambdaHandler;
 import com.syndicate.deployment.model.RetentionSetting;
 import com.task10.controller.Controller;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import software.amazon.awssdk.services.cognitoidentityprovider.endpoints.internal.Value;
 
 @LambdaHandler(
     lambdaName = "api_handler",
@@ -20,7 +15,6 @@ import software.amazon.awssdk.services.cognitoidentityprovider.endpoints.interna
 )
 public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-	private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	private final Controller controller = Controller.getInstance();
 
 	@Override
@@ -49,11 +43,5 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 				}
 			default: return controller.handleException(request.getBody(), context);
 		}
-	}
-
-
-
-	private int parseId(APIGatewayProxyRequestEvent request) {
-		return Integer.parseInt(request.getPathParameters().getOrDefault("tableId", "-1"));
 	}
 }
