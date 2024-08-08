@@ -9,6 +9,6 @@ syndicate generate meta s3_bucket \
 	  --static_website_hosting true
 
 syndicate generate swagger_ui \
-	--name swagger_ui \
-	--path_to_spec export/5dg8cekdee_oas_v3.json \
+	--name api_docs \
+	--path_to_spec export/ltdgh1xsne_oas_v3.json \
 	--target_bucket api-ui-hoster
