@@ -17,6 +17,8 @@
   "paths": {
     "/signup": {
       "post": {
+        "summary": "Registration of user in application",
+        "description": "This method is used to register a new user in the system.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -112,6 +114,8 @@
     },
     "/signin": {
       "post": {
+        "summary": "User login to the system",
+        "description": "This method is used to log the user into the system.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -214,6 +218,8 @@
     },
     "/tables": {
       "post": {
+        "summary": "Create a new table",
+        "description": "This endpoint is used to create a new table in the system.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -319,6 +325,8 @@
         }
       },
       "get": {
+        "summary": "Get a list of tables",
+        "description": "This endpoint is used to retrieve a list of tables in the system.",
         "responses": {
           "200": {
             "description": "The request has succeeded. The server has processed the request and has returned a list of tables as specified in the response body. Each table includes details such as its ID, number, capacity, whether it's in the VIP hall, and optionally, the minimum order required to book it.",
@@ -417,6 +425,8 @@
     },
     "/tables/{tableId}": {
       "get": {
+        "summary": "This method is used to retrieve information about a specific table.",
+        "description": "The server processes the request and returns information about the table specified by {tableId}. The response body contains details such as the table’s ID, number, capacity, whether it’s in the VIP hall, and optionally, the minimum order required to book it. If there was an error in the request, a 400 status code is returned",
         "parameters": [
           {
             "name": "tableId",
@@ -525,6 +535,8 @@
     },
     "/reservations": {
       "post": {
+        "summary" : "This method is used to create a new reservation.",
+        "description": "The server processes the request, and a new reservation is successfully added to the system. If there was an error in the request, such as invalid input, table not found, or conflicting reservations, a 400 status code is returned.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -630,6 +642,8 @@
         }
       },
       "get": {
+        "summary" : "This method is used to create a new reservation.",
+        "description": "The server processes the request and returns a list of reservations as specified in the response body. Each reservation includes details such as its ID, number, capacity, whether it’s in the VIP hall, and optionally, the minimum order required to book it. If there was an error in the request, a 400 status code is returned.",
         "responses": {
           "200": {
             "description": "The request has succeeded. The server has processed the request and has returned a list of reservations as specified in the response body. Each reservation includes details such as its ID, number, capacity, whether it's in the VIP hall, and optionally, the minimum order required to book it.",
